@@ -1246,3 +1246,12 @@ patch_execution_context()
 # Patch `ExecutionResult` to remove all references that could result in reference cycles,
 # allowing memory to be freed immediately, without the need of a deep garbage collection cycle.
 patch_execution_result()
+
+
+
+#####################
+#### Additional #####
+#####################
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = int(os.getenv("DATA_UPLOAD_MAX_MEMORY_SIZE", "52428800"))
+FILE_UPLOAD_MAX_MEMORY_SIZE = int(os.getenv("FILE_UPLOAD_MAX_MEMORY_SIZE", "52428800"))
