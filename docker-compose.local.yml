@@ -19,8 +19,6 @@ services:
       # shared volume between worker and api for media
       - saleor-media:/app/media
       - .:/app
-      # - ../patches/metadata_filter.py:/app/saleor/graphql/core/filters/where_filters.py
-      # - ./custom_settings.py:/app/custom_settings.py
 
     env_file:
       - common.env
