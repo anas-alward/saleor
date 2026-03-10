@@ -144,11 +144,7 @@ class GlobalIDWhereFilter(WhereFilter):
         return super(GlobalIDFilter, self).filter(qs, _id)  # type: ignore[misc]
 
 
-class MetadataWhereFilterBase(WhereFilterSet):
-    metadata = ListObjectTypeFilter(input_class=MetadataFilter, method=filter_metadata)
 
-    class Meta:
-        abstract = True
 
 
 def filter_where_metadata(qs, _, value):
@@ -181,3 +177,13 @@ class MetadataWhereBase(WhereFilterSet):
         method=filter_where_metadata,
         help_text="Filter by metadata fields.",
     )
+
+class MetadataWhereFilterBase(WhereFilterSet):
+    metadata =ObjectTypeWhereFilter(
+        input_class=MetadataFilterInput,
+        method=filter_where_metadata,
+        help_text="Filter by metadata fields.",
+    )
+
+    class Meta:
+        abstract = True
