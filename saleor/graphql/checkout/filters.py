@@ -105,11 +105,9 @@ def filter_checkout_search(qs, _, value):
 def filter_checkout_metadata(qs, _, value):
     for metadata_item in value:
         if metadata_item.value:
-            qs = qs.filter(
-                metadata_storage__metadata__contains={
-                    metadata_item.key: metadata_item.value
-                }
-            )
+            values = [v.strip() for v in metadata_item.value.split(",")]
+            lookup = f"metadata_storage__metadata__{metadata_item.key}__in"
+            qs = qs.filter(**{lookup: values})
         else:
             qs = qs.filter(metadata_storage__metadata__has_key=metadata_item.key)
     return qs
